@@ -5,7 +5,7 @@ import { config } from 'dotenv';
 import * as jwt from 'jsonwebtoken';
 import { Repository } from 'typeorm';
 
-import { User } from '../users/entities/user.entity';
+import { User } from '../../entities/user.entity';
 import { UsersService } from '../users/users.service';
 import { RegisterDto } from './dto/register.dto';
 import { SignInDto } from './dto/sign-in.dto';

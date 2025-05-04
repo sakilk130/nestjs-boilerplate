@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { dataSourceOptions } from 'config/db';
+import { dataSourceOptions } from 'src/config/db';
 import { ResponseInterceptor } from './shared/interceptors/response.interceptor';
 import { AllExceptionsFilter } from './shared/interceptors/all-exceptions.filter';
 import { UsersModule } from './modules/users/users.module';
