@@ -56,7 +56,7 @@ export class User extends BaseEntity {
 
   @Column({
     type: 'boolean',
-    default: false,
+    default: true,
   })
   status: boolean;
 }
