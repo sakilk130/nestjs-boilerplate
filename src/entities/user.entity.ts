@@ -1,7 +1,7 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 
 import { BaseEntity } from './base.entity';
-import { ROLE } from '../shared/enums/roles.enum';
+import { Role } from './roles.entity';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -48,15 +48,12 @@ export class User extends BaseEntity {
   address: string;
 
   @Column({
-    type: 'enum',
-    enum: ROLE,
-    default: ROLE.USER,
-  })
-  role: ROLE;
-
-  @Column({
     type: 'boolean',
     default: true,
   })
   status: boolean;
+
+  @ManyToMany(() => Role, (role) => role.users)
+  @JoinTable()
+  roles: Role[];
 }

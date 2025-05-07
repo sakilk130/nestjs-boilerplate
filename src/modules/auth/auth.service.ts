@@ -40,7 +40,26 @@ export class AuthService {
         where: {
           email: signInDto.email,
         },
-        select: ['id', 'email', 'name', 'password', 'role', 'status'],
+        relations: {
+          roles: {
+            permissions: true,
+          },
+        },
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          password: true,
+          status: true,
+          roles: {
+            name: true,
+            permissions: {
+              id: true,
+              name: true,
+              module_name: true,
+            },
+          },
+        },
       });
 
       if (!user) {
@@ -69,7 +88,6 @@ export class AuthService {
         id: user.id,
         email: user.email,
         name: user.name,
-        role: user.role,
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: '30d',
