@@ -1,23 +1,29 @@
 import { DataSource } from 'typeorm';
 import * as path from 'path';
+import { hash } from 'bcrypt';
+import { config } from 'dotenv';
 
 import { User } from '../entities/user.entity';
 import { Role } from '../entities/roles.entity';
 
 const dataSourceConfigPath = path.join(__dirname, '../config/db.ts');
 
-const adminUserData = {
-  name: 'Admin User',
-  email: 'admin@admin.com',
-  password: 'replace-with-hashed-password',
-  avatar: null,
-  phone: null,
-  address: null,
-  status: true,
-  roles: [],
-};
+config();
+
+const salt = Number(process.env.SALT_ROUNDS);
 
 async function seedAdminUser() {
+  const adminUserData = {
+    name: 'Admin User',
+    email: 'admin@admin.com',
+    password: await hash('password', salt),
+    avatar: null,
+    phone: null,
+    address: null,
+    status: true,
+    roles: [],
+  };
+
   console.log('Starting admin user seeder...');
 
   let dataSource: DataSource | undefined;

@@ -1,9 +1,10 @@
 import { DataSource } from 'typeorm';
 import * as path from 'path';
+
 import { Role } from '../entities/roles.entity';
 import { Permission } from '../entities/permission.entity';
 import { permissions } from '../constants/permissions';
-import { ROLES } from 'src/shared/enums/roles.enum';
+import { ROLES } from '../shared/enums/roles.enum';
 
 const dataSourceConfigPath = path.join(__dirname, '../config/db.ts');
 const initialRoles = [
