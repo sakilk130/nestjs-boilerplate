@@ -23,7 +23,17 @@ export class Role extends BaseEntity {
   status: boolean;
 
   @ManyToMany(() => Permission)
-  @JoinTable()
+  @JoinTable({
+    name: 'role_permissions',
+    joinColumn: {
+      name: 'role_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'permission_id',
+      referencedColumnName: 'id',
+    },
+  })
   permissions: Permission[];
 
   @ManyToMany(() => User, (user) => user.roles)
